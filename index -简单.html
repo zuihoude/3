@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+* { margin:0; padding:0;}
+#div1 { border:1px solid #ccc; width:650px; margin:0 auto }
+#content { float:left; width:560px; overflow:hidden; position:relative; height:200px;}
+#content ul { position:absolute; left:0; top:0;}
+#content li { float:left; list-style-type:none;}
+</style>
+
+</head>
+
+<body>
+<div id="div1">
+<div id="content">
+<ul>
+<li><img src="images/1.jpg" width="560" height="200" /></li>
+<li><img src="images/2.jpg" width="560" height="200" /></li>
+<li><img src="images/3.jpg" width="560" height="200" /></li>
+<li><img src="images/4.jpg" width="560" height="200" /></li>
+</ul>
+</div>
+</div>
+<script type="text/javascript">
+
+	var odiv=document.getElementById('div1');
+	var	oul=odiv.getElementsByTagName('ul')[0];
+	var oli=odiv.getElementsByTagName('li');
+	oul.innerHTML=oul.innerHTML+oul.innerHTML;
+	oul.style.width=oli.length*oli[0].offsetWidth+'px';
+	var timer2=null;
+	start();
+	function start()
+	{
+		clearInterval(timer2);
+		timer2=setInterval(function()
+		{	
+			show(-560)	
+		},2000)
+	}
+	var timer=null;
+	var i=0;
+	
+			
+	function show(target)
+	{
+		i+=target;
+		clearInterval(timer);
+		timer=setInterval(function()
+		{
+			var speed=(i-oul.offsetLeft)/8;
+			if(speed>0)
+			{
+				speed=Math.ceil(speed)
+			}
+			else
+			{
+				speed=Math.floor(speed)
+			}
+			if(-oul.offsetLeft>=oul.offsetWidth/2)
+			{
+					i=0;
+					oul.style.left=0;
+			}
+			else if(oul.offsetLeft>0)
+			{
+				oul.style.left=-oul.offsetWidth/2+'px';
+				i=-target*3;	
+			}
+			oul.style.left=oul.offsetLeft+speed+'px';	
+		},30)
+		
+	}
+	
+
+</script>
+</body>
+</html>
